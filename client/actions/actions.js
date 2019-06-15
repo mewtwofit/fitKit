@@ -6,6 +6,13 @@ export const addExercise (formData) => {
   type: types.ADD_EXERCISE,
   payload: formData
 }
+
+export const addFood = (formData) => (dispatch) => {
+  return {
+  type: types.ADD_FOOD,
+  payload: formData,
+}
+};
 /*
 export const addFood = ( ? ) => {
   type: types.ADD_FOOD,
