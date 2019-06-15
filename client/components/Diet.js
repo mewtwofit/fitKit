@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import PastDayFoods from './PastDayFoods';
 export default class Diet extends Component {
   render() {
     return (
@@ -15,6 +15,7 @@ export default class Diet extends Component {
         <p> New Food </p>
         <p> Calories </p>
         <p> Name of Food </p>
+        <PastDayFoods />
       </div>
     );
   }

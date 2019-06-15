@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PreviousDaySummary from './PreviousDaySummary';
 
 export default class Summary extends Component {
 
@@ -9,7 +10,7 @@ export default class Summary extends Component {
         <p> Exercises </p>
         <p> Diet </p>
         <p> Net Weight </p>
-
+        <PreviousDaySummary />
       </div>
     )
   }
