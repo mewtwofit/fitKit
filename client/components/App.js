@@ -4,6 +4,7 @@ import Exercise from "./Exercise";
 import PastDayExercises from "./PastDayExercises";
 import PastDayFoods from "./PastDayFoods";
 import Diet from "./Diet";
+
 export default class App extends Component {
   render() {
     return (
