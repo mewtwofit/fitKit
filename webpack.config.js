@@ -14,7 +14,7 @@ const rules = [
 module.exports = {
   target: 'web', //where to export code to
   mode: 'development',
-  entry: __dirname + '/src/client/index.js',
+  entry: __dirname + '/client/index.js',
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js'
