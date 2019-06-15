@@ -18,8 +18,10 @@ export default class Profile extends Component {
         </form>
         <form>
           <button class = 'dropbtn'> Gender </label>
-          
-          
+          <div class = 'dropdown-content'>
+            <a>M</a>
+            <a>F</a>
+          </div>
         </form>
         <p> BMI: {}</p>
         <button> New Date </button>
