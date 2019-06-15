@@ -6,10 +6,22 @@ export default class Profile extends Component {
   render () {
     return (
       <div>
-        <p> First Name: </p>
-        <p> Last Name: </p>
-        <p> Enter Weight: </p>
-        <p> BMI: </p>
+    
+        <form>
+          <label> Enter Weight: </label>
+          <input type="text" />
+        </form>
+        
+        <form>
+          <label> Enter Height: </label>
+          <input type="text" />
+        </form>
+        <form>
+          <button class = 'dropbtn'> Gender </label>
+          
+          
+        </form>
+        <p> BMI: {}</p>
         <button> New Date </button>
       </div>
     )
