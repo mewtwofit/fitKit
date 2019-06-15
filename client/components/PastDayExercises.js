@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
 
-export default class PastDay extends Component {
+export default class PastDayExercises extends Component {
   render() {
     return (
       <div>
