@@ -1,5 +1,3 @@
-
-
 export const ADD_DATE = "ADD_DATE";
 export const ADD_EXERCISE = "ADD_EXERCISE";
 // TODO: will need another
