@@ -1,21 +1,26 @@
-const pg = require("pg");
-const uri = "postgres://dnohashi:ilovetesting@localhost/Fitness";
+// const pg = require("pg");
+const { Pool } = require('pg');
+// const uri = "postgres://dnohashi:ilovetesting@localhost/Fitness";
+
+const pool = new Pool({
+  user: 'bwjtiyme',
+  host: 'raja.db.elephantsql.com',
+  database: 'bwjtiyme',
+  password: 'CeVodd7xBrsUwzUh9kC0doEswfcSEdvw',
+  port: 5432,
+  max: 20,
+  idleTimeoutMillis: 30000,
+  _connectionTimeoutMillis: 2000
+});
 
 // Global variable to store reference to 'db' object after connecting to postgresql database
-let dbo;
+// let dbo;
 
-/*
-  Connect to postgresql database
-  If successful, store reference to 'db' variable in global 'dbo'
-  Creates tables (if they do not already exist)
-*/
-
-pg.connect(uri, (err, db) => {
+pool.connect((err, client, release) => {
   if (err) throw new Error(err);
-  console.log("POSTGRESQL SERVER CONNECTED");
-  dbo = db;
+  console.log('connecting...');
 
-  db.query(`CREATE TABLE IF NOT EXISTS exercises (
+  client.query(`CREATE TABLE IF NOT EXISTS exercises (
     "_id" SERIAL, 
     "date" date, 
     "exercise" varchar(255), 
@@ -24,14 +29,14 @@ pg.connect(uri, (err, db) => {
     "calories" int
     )`);
 
-  db.query(`CREATE TABLE IF NOT EXISTS diet (
+  client.query(`CREATE TABLE IF NOT EXISTS diet (
     "_id" SERIAL, 
     "date" date, 
     "food" varchar(255), 
     "calories" int
     )`);
 
-  db.query(`CREATE TABLE IF NOT EXISTS users (
+  client.query(`CREATE TABLE IF NOT EXISTS users (
     "_id" SERIAL, 
     "weight" int, 
     "age" int, 
@@ -46,7 +51,7 @@ pg.connect(uri, (err, db) => {
 module.exports = serverController = {
   getExercises: function(req, res, next) {
     // Query database from all items in 'exercises' table
-    dbo.query("SELECT * FROM exercises", (err, data) => {
+    pool.query("SELECT * FROM exercises", (err, data) => {
       if (err) return next(err); // Throw error if err occurs while querying database
 
       //After receiving data from database,
@@ -75,7 +80,7 @@ module.exports = serverController = {
       req.body.calories
     ];
 
-    dbo.query(text, values, (err, data) => {
+    pool.query(text, values, (err, data) => {
       if (err) return next(err); // Throw error if err occurs while querying database
 
       return next(); // If successful, set status to 200 and return success message to console
@@ -84,7 +89,7 @@ module.exports = serverController = {
 
   getDiet: function(req, res, next) {
     // Query database from all items in 'diet' table
-    dbo.query("SELECT * FROM diet", (err, data) => {
+    pool.query("SELECT * FROM diet", (err, data) => {
       if (err) return next(err); // Throw error if err occurs while querying database
 
       //After receiving data from database,
@@ -103,14 +108,14 @@ module.exports = serverController = {
     const text = "insert into diet (date, food, calories) values ($1, $2, $3)";
     const values = [new Date(), req.body.food, req.body.calories];
 
-    dbo.query(text, values, (err, inputData) => {
+    pool.query(text, values, (err, inputData) => {
       if (err) return next(err);
       return next();
     });
   },
 
   getUser: function(req, res, next) {
-    dbo.query("select * from users", (err, data) => {
+    pool.query("select * from users", (err, data) => {
       if (err) return next(err);
 
       //After receiving data from database,
@@ -129,9 +134,48 @@ module.exports = serverController = {
     const text = "insert into users (weight, age, gender, bmi, bmr, height, date) values ($1, $2, $3, $4, $5, $6, $7)";
     const values = [req.body.weight, req.body.age, req.body.gender, req.body.bmi, req.body.bmr, req.body.height, new Date()];
     
-    dbo.query(text,values, (err, inputData) => {
+    pool.query(text,values, (err, inputData) => {
       if (err) return next(err);
       return next();
     });
   }
 };
+
+/*
+  Connect to postgresql database
+  If successful, store reference to 'db' variable in global 'dbo'
+  Creates tables (if they do not already exist)
+*/
+
+// pool.connect(uri, (err, db) => {
+//   if (err) throw new Error(err);
+//   console.log("POSTGRESQL SERVER CONNECTED");
+//   dbo = db;
+
+//   db.query(`CREATE TABLE IF NOT EXISTS exercises (
+//     "_id" SERIAL, 
+//     "date" date, 
+//     "exercise" varchar(255), 
+//     "reps" int, 
+//     "time" time,
+//     "calories" int
+//     )`);
+
+//   db.query(`CREATE TABLE IF NOT EXISTS diet (
+//     "_id" SERIAL, 
+//     "date" date, 
+//     "food" varchar(255), 
+//     "calories" int
+//     )`);
+
+//   db.query(`CREATE TABLE IF NOT EXISTS users (
+//     "_id" SERIAL, 
+//     "weight" int, 
+//     "age" int, 
+//     "gender" varchar(255), 
+//     "bmi" int, 
+//     "bmr" int, 
+//     "height" int, 
+//     "date" date
+//     )`);
+// });
