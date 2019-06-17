@@ -133,7 +133,7 @@ class Profile extends Component {
           <br />
           <button type="submit">Submit</button>
         </form>
-        <h2>Your Daily Stats: </h2>
+        <h3>Your Daily Stats: </h3>
         {dailyLog}
       </div>
     );

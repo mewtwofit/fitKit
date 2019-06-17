@@ -9,6 +9,8 @@ export default class App extends Component {
     return (
       <div>
         <Profile />
+        <Diet />
+        <Exercise />
       </div>
     );
   }

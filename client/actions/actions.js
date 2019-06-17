@@ -28,15 +28,25 @@ export const addExercise = data => {
 // addExercise post /addExercise
 
 //Incomplete needs to return object after successful add to database
+export const addFoodAsync = foodData => {
+  return {
+    type: types.ADD_FOOD,
+    payload: foodData
+  }
+}
+
 export const addFood = formData => dispatch => {
-  fetch()
-    .then()
-    .then();
-    return {
-      type: types.ADD_FOOD,
-      payload: formData
-    };
-}; 
+  fetch('http://localhost:5000/addDiet', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+  })
+  .then(res => {
+    dispatch(addFoodAsync(formData));
+  })
+}
 
 export const addSummaryAsync = data => {
   return {
