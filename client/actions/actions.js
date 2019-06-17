@@ -20,7 +20,7 @@ export const addFood = formData => dispatch => {
     };
 }; 
 
-const addSummaryAsync = data => {
+export const addSummaryAsync = data => {
   return {
     type: types.ADD_SUMMARY,
     payload: data
