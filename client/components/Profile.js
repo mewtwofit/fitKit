@@ -16,8 +16,7 @@ class Profile extends Component {
       bmi: 0,
       bmr: 0,
       height: 0,
-      date: "",
-      previousSummaries: []
+      date: ""
     };
 
     this.changeWeight.bind(this);
@@ -31,9 +30,9 @@ class Profile extends Component {
     fetch('http://localhost:5000/getUser')
     .then(res => res.json())
     .then(summaries => {
-      this.setState({
-        previousSummaries: summaries
-      })
+      for(let summary of summaries){
+        this.props.addSummaryAsync(summary);
+      }
     });
   }
 
@@ -97,21 +96,7 @@ class Profile extends Component {
   //onSubmit - calculate everything before calling action creator and dispatching
   render() {
     const dailyLog = [];
-    let summaries = this.props.summaries;
-    for(let j = 0; j < this.state.previousSummaries.length; j++){
-      dailyLog.push(
-        <PreviousDaySummary 
-          day={this.state.previousSummaries[j].date}
-          age={this.state.previousSummaries[j].age}
-          weight={this.state.previousSummaries[j].weight}
-          gender={this.state.previousSummaries[j].gender}
-          bmi={this.state.previousSummaries[j].bmi}
-          bmr={this.state.previousSummaries[j].bmr}
-          height={this.state.previousSummaries[j].height}
-        />
-      );
-    };
-
+    //Adding content from redux store
     for(let i = 0; i < this.props.summaries.length; i++){
       dailyLog.push(
         <PreviousDaySummary 
@@ -148,7 +133,7 @@ class Profile extends Component {
           <br />
           <button type="submit">Submit</button>
         </form>
-        <h2>Your Daily Stats: </h2>
+        <h3>Your Daily Stats: </h3>
         {dailyLog}
       </div>
     );
@@ -160,7 +145,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addSummary: summary => dispatch(actions.addSummary(summary))
+  addSummary: summary => dispatch(actions.addSummary(summary)),
+  addSummaryAsync: summary => dispatch(actions.addSummaryAsync(summary))
 });
 
 export default connect(

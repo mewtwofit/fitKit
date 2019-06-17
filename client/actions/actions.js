@@ -6,11 +6,11 @@ import * as types from "../constants/actionsTypes";
 //TO THE APPROPRIATE SERVER ROUTES TO ADD DATA TO THE SERVER
 export const addExerciseAsync = data => ({
   type: types.ADD_EXERCISE,
-  payload: data,
+  payload: data
 });
 
 export const addExercise = data => {
-    // console.log('addexercise actions', data)
+  console.log('addexercise actions', data)
   return dispatch => {
     fetch('http://localhost:5000/addExercise', {
       method: 'POST',
@@ -28,17 +28,27 @@ export const addExercise = data => {
 // addExercise post /addExercise
 
 //Incomplete needs to return object after successful add to database
-export const addFood = formData => dispatch => {
-  fetch()
-    .then()
-    .then();
-    return {
-      type: types.ADD_FOOD,
-      payload: formData
-    };
-}; 
+export const addFoodAsync = foodData => {
+  return {
+    type: types.ADD_FOOD,
+    payload: foodData
+  }
+}
 
-const addSummaryAsync = data => {
+export const addFood = foodData => dispatch => {
+  fetch('http://localhost:5000/addDiet', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(foodData)
+  })
+  .then(res => {
+    dispatch(addFoodAsync(foodData));
+  })
+}
+
+export const addSummaryAsync = data => {
   return {
     type: types.ADD_SUMMARY,
     payload: data

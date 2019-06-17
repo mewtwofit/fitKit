@@ -28,38 +28,7 @@ export default class App extends Component {
   <Route path="/diet" component={Diet} />
 </div>
 </Router>
+
     );
   }
 }
-
-
-
-
-{/* <div>
-<Profile /> 
-<Profile />
-</div> */}
-
-
-
-
-{/* <Router>
-<div>
-
-      <Link to="/">Profile</Link>
-
-      <Link to="/exercise">Exercise</Link>
-
-      <Link to="/diet">Diet</Link>
-
-
-  <hr />
-
-  <Route exact path="/" component={Profile} />
-  <Route path="/exercise" component={Exercise} />
-  <Route path="/diet" component={Diet} />
-</div>
-</Router> */}
-// );
-// }
-// }

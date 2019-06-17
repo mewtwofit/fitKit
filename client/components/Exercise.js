@@ -20,25 +20,20 @@ class Exercise extends Component {
       date: "",
       exercise: "",
       type: "",
-      sets: 0,
       reps: 0,
       time: "",
-      calories: 0,
-      previousExercises: []
+      calories: 0
     };
     this.selectType.bind(this);
     this.setExercise.bind(this);
-    this.changeSets.bind(this);
     this.changeExercise.bind(this);
+    this.changeCalories.bind(this);
   }
 
   componentDidMount() {
     fetch("http://localhost:5000/getExercises")
       .then(res => res.json())
       .then(exercises => {
-        // this.setState({
-        //   previousExercises: exercises
-        // });
         for(let exercise of exercises){
           this.props.addExerciseAsync(exercise);
         }
@@ -60,14 +55,6 @@ class Exercise extends Component {
     });
   }
 
-  changeSets(e) {
-    let sets = e.target.value;
-    this.setState({
-      sets,
-      time: 0
-    });
-  }
-
   changeReps(e) {
     let reps = Number(e.target.value);
     this.setState({
@@ -78,27 +65,26 @@ class Exercise extends Component {
   changeTime(e) {
     let time = e.target.value;
     this.setState({
-      time,
-      sets: 0
+      time
     });
+  }
+
+  changeCalories(e){
+    let calories = e.target.value;
+    this.setState({
+      calories
+    })
   }
   // date, exercise, reps, time, calories
   setExercise(e) {
     e.preventDefault();
-    function getRandomIntInclusive(min, max) {
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
-    }
-    let calories = getRandomIntInclusive(50, 2000);
-    // console.log('testing submit',this.state);
-    this.setState(
-      {
-        calories: calories,
-        date: new Date().toISOString().slice(0, 10)
-      },
-      () => {
-        // console.log('did we get into set exeercise and call add exercise?')
+    let time = this.state.time ? this.state.time : "00:00:00";
+    
+    this.setState({
+      time,
+      date: new Date().toISOString().slice(0, 10)
+    },
+    () => {
         this.props.addExercise({
           exercise: this.state.exercise,
           reps: this.state.reps,
@@ -111,23 +97,9 @@ class Exercise extends Component {
   }
 
   render() {
-    // console.log(this.state)
     const dailyLog = [];
-    // let exercises = this.props.exercises;
-    // for (let j = 0; j < this.state.previousExercises.length; j++) {
-    //   // console.log(this.state.previousExercises[j])
-    //   dailyLog.push(
-    //     <PastDayExercises
-    //       day={this.state.previousExercises[j].date}
-    //       exercise={this.state.previousExercises[j].exercise}
-    //       reps={this.state.previousExercises[j].reps}
-    //       time={this.state.previousExercises[j].time}
-    //       calories={this.state.previousExercises[j].calories}
-    //     />
-    //   );
-    // }
+
     for (let i = 0; i < this.props.exercises.length; i++) {
-      // console.log('testing', this.props.exercises)
       dailyLog.push(
         <PastDayExercises
           day={this.props.exercises[i].date}
@@ -140,6 +112,7 @@ class Exercise extends Component {
     }
     return (
       <div>
+        <h2>Exercise Input: </h2>
         <form onSubmit={e => this.setExercise(e)}>
           <br />
           <label>Exercise: </label>
@@ -160,24 +133,24 @@ class Exercise extends Component {
             </div>
           ) : this.state.type === "strength" ? (
             <div>
-              <label> Sets: </label>
-              <input onChange={e => this.changeSets(e)} type="number" />
               <label> Reps: </label>
               <input onChange={e => this.changeReps(e)} type="number" />
-              <label> Time: </label>
-              <input onChange={e => this.changeTime(e)} type="text" />
             </div>
           ) : null}
-
-          <button type="submit">Add New Exercise</button>
+          <br />
+          <label> Calories Burned: </label>
+          <input onChange={e => this.changeCalories(e)} type="number" />
+          <br />
+          <button type="submit">Submit</button>
         </form>
 
-        <p> Calories Burnt: {this.state.calories} </p>
+        {/*<p> Calories Burnt: {this.state.calories} </p>*/}
+        <h3>Daily Exercise Log: </h3>
         {dailyLog}
       </div>
     );
-  }
-}
+  };
+};
 
 const mapStateToProps = state => ({
   exercises: state.reducers.exercises

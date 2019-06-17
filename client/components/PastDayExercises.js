@@ -9,10 +9,9 @@ export default class PastDayExercises extends Component {
       // console.log('testing pastday time', this.props.time)
       return (
         <div>
-          <p><span>Day: </span> {this.props.day}</p>
+          <h3>Day: {this.props.day}</h3>
           <p><span>Exercise: </span>{this.props.exercise}</p>
           <p><span>Reps: </span>{this.props.reps}</p>
-          <p><span>Time: </span>{this.props.time}</p>
           <p><span>Calories: </span>{this.props.calories}</p>
         </div>
       );
@@ -20,10 +19,10 @@ export default class PastDayExercises extends Component {
       // console.log('testing pastday reps', this.props.time)
       return (
         <div>
-          <p><span>Day: </span> {this.props.day}</p>
+          <h3>Day: {this.props.day}</h3>
           <p><span>Exercise: </span>{this.props.exercise}</p>
           <p><span>Time: </span>{this.props.time}</p>
-          <p><span>Calories: </span>{this.props.calories}</p>
+          <p><span>Calories Burned: </span>{this.props.calories}</p>
         </div>
       );
     }
