@@ -26,15 +26,15 @@ class Profile extends Component {
     this.setBMRandBMIandDate.bind(this);
   };
 
-  componentDidMount(){
-    fetch('http://localhost:5000/getUser')
-    .then(res => res.json())
-    .then(summaries => {
-      for(let summary of summaries){
-        this.props.addSummaryAsync(summary);
-      }
-    });
-  }
+  // componentDidMount(){
+  //   fetch('http://localhost:5000/getUser')
+  //   .then(res => res.json())
+  //   .then(summaries => {
+  //     for(let summary of summaries){
+  //       this.props.addSummaryAsync(summary);
+  //     }
+  //   });
+  // }
 
   changeWeight(e) {
     let weight = e.target.value;
