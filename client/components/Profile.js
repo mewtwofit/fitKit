@@ -16,8 +16,7 @@ class Profile extends Component {
       bmi: 0,
       bmr: 0,
       height: 0,
-      date: "",
-      previousSummaries: []
+      date: ""
     };
 
     this.changeWeight.bind(this);
