@@ -4,10 +4,28 @@ import * as types from "../constants/actionsTypes";
 //TO GROUP MEMBERS:
 //IF YOU ARE MAKING THESE ACTION CREATORS: CHECK EXAMPLES OF REDUX THUNK AND MAKE SURE THEY GO
 //TO THE APPROPRIATE SERVER ROUTES TO ADD DATA TO THE SERVER
-export const addExercise = formData => ({
+export const addExerciseAsync = data => ({
   type: types.ADD_EXERCISE,
-  payload: formData
+  payload: data,
 });
+
+export const addExercise = data => {
+    // console.log('addexercise actions', data)
+  return dispatch => {
+    fetch('http://localhost:5000/addExercise', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(res => {
+      dispatch(addExerciseAsync(data));
+    })
+  }
+}
+
+// addExercise post /addExercise
 
 //Incomplete needs to return object after successful add to database
 export const addFood = formData => dispatch => {
