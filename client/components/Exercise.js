@@ -28,7 +28,6 @@ class Exercise extends Component {
     };
     this.selectType.bind(this);
     this.setExercise.bind(this);
-    this.changeSets.bind(this);
     this.changeExercise.bind(this);
   }
 
@@ -57,14 +56,6 @@ class Exercise extends Component {
     let exercise = e.target.value;
     this.setState({
       exercise
-    });
-  }
-
-  changeSets(e) {
-    let sets = e.target.value;
-    this.setState({
-      sets,
-      time: 0
     });
   }
 
@@ -113,19 +104,7 @@ class Exercise extends Component {
   render() {
     // console.log(this.state)
     const dailyLog = [];
-    // let exercises = this.props.exercises;
-    // for (let j = 0; j < this.state.previousExercises.length; j++) {
-    //   // console.log(this.state.previousExercises[j])
-    //   dailyLog.push(
-    //     <PastDayExercises
-    //       day={this.state.previousExercises[j].date}
-    //       exercise={this.state.previousExercises[j].exercise}
-    //       reps={this.state.previousExercises[j].reps}
-    //       time={this.state.previousExercises[j].time}
-    //       calories={this.state.previousExercises[j].calories}
-    //     />
-    //   );
-    // }
+
     for (let i = 0; i < this.props.exercises.length; i++) {
       // console.log('testing', this.props.exercises)
       dailyLog.push(
@@ -140,6 +119,7 @@ class Exercise extends Component {
     }
     return (
       <div>
+        <h2>Exercise Input: </h2>
         <form onSubmit={e => this.setExercise(e)}>
           <br />
           <label>Exercise: </label>
@@ -160,19 +140,17 @@ class Exercise extends Component {
             </div>
           ) : this.state.type === "strength" ? (
             <div>
-              <label> Sets: </label>
-              <input onChange={e => this.changeSets(e)} type="number" />
               <label> Reps: </label>
               <input onChange={e => this.changeReps(e)} type="number" />
               <label> Time: </label>
               <input onChange={e => this.changeTime(e)} type="text" />
             </div>
           ) : null}
-
-          <button type="submit">Add New Exercise</button>
+          <button type="submit">Submit</button>
         </form>
 
-        <p> Calories Burnt: {this.state.calories} </p>
+        {/*<p> Calories Burnt: {this.state.calories} </p>*/}
+        <h3>Daily Exercise Log: </h3>
         {dailyLog}
       </div>
     );
