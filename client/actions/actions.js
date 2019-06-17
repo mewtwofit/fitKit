@@ -6,11 +6,11 @@ import * as types from "../constants/actionsTypes";
 //TO THE APPROPRIATE SERVER ROUTES TO ADD DATA TO THE SERVER
 export const addExerciseAsync = data => ({
   type: types.ADD_EXERCISE,
-  payload: data,
+  payload: data
 });
 
 export const addExercise = data => {
-    // console.log('addexercise actions', data)
+  console.log('addexercise actions', data)
   return dispatch => {
     fetch('http://localhost:5000/addExercise', {
       method: 'POST',
@@ -35,16 +35,16 @@ export const addFoodAsync = foodData => {
   }
 }
 
-export const addFood = formData => dispatch => {
+export const addFood = foodData => dispatch => {
   fetch('http://localhost:5000/addDiet', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(formData)
+    body: JSON.stringify(foodData)
   })
   .then(res => {
-    dispatch(addFoodAsync(formData));
+    dispatch(addFoodAsync(foodData));
   })
 }
 

@@ -68,6 +68,7 @@ module.exports = serverController = {
   },
 
   addExercise: function(req, res, next) {
+    console.log('In Server: ', req.body);
     // Query string to insert items in database
     const text =
       "INSERT INTO exercises (date, exercise, reps, time, calories) values ($1, $2, $3, $4, $5)";
