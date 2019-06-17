@@ -14,22 +14,17 @@ class Summary extends Component {
     this.getExercises.bind(this);
   };
 
-  // componentDidUpdate(){
-
-  // }
-
   getCalories(){
     const calArray = [];
 
     let prevDate;
-
-    for(let cal of this.props.calories){
+    for(let cal of this.props.diet){
       //If current object represents a new day
       if(cal.date !== prevDate){
         prevDate = cal.date;
         calArray.push(
           <div>
-            <h3>Date: {cal.date}</h3>
+            <h4>Date: {cal.date}</h4>
             <p>Ate: {cal.food}  Calories: {cal.calories}</p>
           </div>
         )
@@ -45,14 +40,15 @@ class Summary extends Component {
     return calArray;
   };
 
+    
   getWeightProgression(){
     const weightArray = [];
 
     for(let day of this.props.summaries){
       weightArray.push(
         <div>
-          <h2>Date: {day.date}</h2>
-          <h3>Weight: {day.weight}</h3>
+          <h4>Date: {day.date}</h4>
+          <p>Weight: {day.weight}</p>
         </div>
       )
     }
@@ -66,26 +62,21 @@ class Summary extends Component {
     let prevDate;
 
     for(let exercise of this.props.exercises){
-      let curExercise;
-      //If a time value is present the user jogged
-      if(exercise.time){
-        curExercise = <p>Exercise: Running  Time: {cal.time}</p>
-      } else {
-        curExercise = <p>Exercise: {cal.exercise} Reps: {cal.reps}</p>
-      }
       //If current object represents a new day
       if(exercise.date !== prevDate){
         prevDate = exercise.date;
         exercisesArray.push(
           <div>
             <h3>Date: {exercise.date}</h3>
-            {curExercise}
+            <p>Exercise: {exercise.exercise} Reps: {exercise.reps}</p>
+            <p>Cardio Time: {exercise.time}</p>
           </div>
         )
       } else {
         exercisesArray.push(
           <div>
-            {curExercise}
+            <p>Exercise: {exercise.exercise} Reps: {exercise.reps}</p>
+            <p>Cardio Time: {exercise.time}</p>
           </div>
         )
       }
@@ -93,28 +84,29 @@ class Summary extends Component {
     
     return exercisesArray;
   }
-  
+
   render () {
     const calorieSummary = this.getCalories();
     const weightProgression = this.getWeightProgression();
     const exerciseByDay = this.getExercises();
 
+    
+  
     return (
       <div>
-        <h1>test</h1>
-        <h2>Your Calorie Summaries By Day: </h2>
+        <h1></h1>
+        <h3>Your Calorie Summaries By Day: </h3>
         {calorieSummary}
         <br/>
-        <h2>Your Weight Progression By Day: </h2>
+        <h3>Your Weight Progression By Day: </h3>
         {weightProgression}
         <br/>
-        <h2>Your Daily Exercises Routine: </h2>
+        <h3>Your Daily Exercises Routine: </h3>
         {exerciseByDay}
       </div>
     )
   }
 }
-
 
 const mapStateToProps = state => ({
   exercises: state.reducers.exercises,
@@ -125,3 +117,6 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps
 )(Summary);
+
+
+
