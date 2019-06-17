@@ -12,7 +12,7 @@ export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_EXERCISE:
       stateCopy = state.exercises.slice();
-      stateCopy.push(action.payload);
+      stateCopy.unshift(action.payload);
       // console.log('testing state add exe', stateCopy)
       return {
         ...state,
@@ -20,14 +20,14 @@ export const reducer = (state = initialState, action) => {
       };
     case actionTypes.ADD_FOOD:
       stateCopy = state.diet.slice();
-      stateCopy.push(action.payload);
+      stateCopy.unshift(action.payload);
       return {
         ...state,
         diet: stateCopy
       };
     case actionTypes.ADD_SUMMARY:
       stateCopy = state.summaries.slice();
-      stateCopy.push(action.payload);
+      stateCopy.unshift(action.payload);
       console.log(stateCopy);
       return {
         ...state,
