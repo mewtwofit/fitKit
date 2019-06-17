@@ -16,6 +16,7 @@ class Diet extends Component {
 
     this.onFoodChange = this.onFoodChange.bind(this);
     this.onCalorieChange = this.onCalorieChange.bind(this);
+    this.submitFood = this.submitFood.bind(this);
   };
 
   componentDidMount(){
@@ -29,27 +30,27 @@ class Diet extends Component {
   }
 
   onFoodChange (event) {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     this.setState({
-      foodName:event.target.value
+      foodName: event.target.value
     });
 
   }
   onCalorieChange (event) {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     this.setState({
       calories: event.target.value
     });
   }
-  onSubmit (event) {
-    event.preventDefault();
+  submitFood (e) {
+    e.preventDefault();
     this.setState({
       date: new Date().toISOString().slice(0,10)
     }, () => {
       this.props.addFood({
-        foodName:this.state.foodName,
-        calories:this.state.calories,
-        date:this.state.date
+        food: this.state.foodName,
+        calories: this.state.calories,
+        date: this.state.date
       });
     });
   }
@@ -60,7 +61,7 @@ class Diet extends Component {
     for (let i = 0; i < this.props.diet.length;i++){
       dailyLog.push(
         <PastDayFoods 
-        foodName = {this.props.diet[i].foodName}
+        foodName = {this.props.diet[i].food}
         calories = {this.props.diet[i].calories}
         date = {this.props.diet[i].date}
         />
@@ -70,14 +71,14 @@ class Diet extends Component {
     return (
       <div>
         <h2>Food Input: </h2>
-        <form >
+        <form onSubmit = {event=>this.submitFood(event)}>
           <label>Food Name</label>
           <input onChange = {event => this.onFoodChange(event)} type="text" />
           <br />
           <label >Calories </label>
           <input onChange = {event => this.onCalorieChange(event)} type="text" />
           <br />
-          <button onSubmit = {event=>this.onSubmit(event)}> Submit </button>
+          <button> Submit </button>
         </form>
         <h3>Daily Food Log: </h3>
         <div>{dailyLog}</div>

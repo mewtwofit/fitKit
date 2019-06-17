@@ -20,24 +20,20 @@ class Exercise extends Component {
       date: "",
       exercise: "",
       type: "",
-      sets: 0,
       reps: 0,
       time: "",
-      calories: 0,
-      previousExercises: []
+      calories: 0
     };
     this.selectType.bind(this);
     this.setExercise.bind(this);
     this.changeExercise.bind(this);
+    this.changeCalories.bind(this);
   }
 
   componentDidMount() {
     fetch("http://localhost:5000/getExercises")
       .then(res => res.json())
       .then(exercises => {
-        // this.setState({
-        //   previousExercises: exercises
-        // });
         for(let exercise of exercises){
           this.props.addExerciseAsync(exercise);
         }
@@ -69,27 +65,26 @@ class Exercise extends Component {
   changeTime(e) {
     let time = e.target.value;
     this.setState({
-      time,
-      sets: 0
+      time
     });
+  }
+
+  changeCalories(e){
+    let calories = e.target.value;
+    this.setState({
+      calories
+    })
   }
   // date, exercise, reps, time, calories
   setExercise(e) {
     e.preventDefault();
-    function getRandomIntInclusive(min, max) {
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
-    }
-    let calories = getRandomIntInclusive(50, 2000);
-    // console.log('testing submit',this.state);
-    this.setState(
-      {
-        calories: calories,
-        date: new Date().toISOString().slice(0, 10)
-      },
-      () => {
-        // console.log('did we get into set exeercise and call add exercise?')
+    let time = this.state.time ? this.state.time : "00:00:00";
+    
+    this.setState({
+      time,
+      date: new Date().toISOString().slice(0, 10)
+    },
+    () => {
         this.props.addExercise({
           exercise: this.state.exercise,
           reps: this.state.reps,
@@ -102,11 +97,9 @@ class Exercise extends Component {
   }
 
   render() {
-    // console.log(this.state)
     const dailyLog = [];
 
     for (let i = 0; i < this.props.exercises.length; i++) {
-      // console.log('testing', this.props.exercises)
       dailyLog.push(
         <PastDayExercises
           day={this.props.exercises[i].date}
@@ -142,10 +135,12 @@ class Exercise extends Component {
             <div>
               <label> Reps: </label>
               <input onChange={e => this.changeReps(e)} type="number" />
-              <label> Time: </label>
-              <input onChange={e => this.changeTime(e)} type="text" />
             </div>
           ) : null}
+          <br />
+          <label> Calories Burned: </label>
+          <input onChange={e => this.changeCalories(e)} type="number" />
+          <br />
           <button type="submit">Submit</button>
         </form>
 
@@ -154,8 +149,8 @@ class Exercise extends Component {
         {dailyLog}
       </div>
     );
-  }
-}
+  };
+};
 
 const mapStateToProps = state => ({
   exercises: state.reducers.exercises

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 const PreviousDaySummary = (props) => {
     return (
       <div>
-        <p><span>Day: </span>{props.day}</p>
+        <h3>Day: {props.day}</h3>
         <p><span>Age: </span>{props.age}</p>
         <p><span>Gender: </span>{props.gender}</p>
         <p><span>Weight: </span>{props.weight}</p>
