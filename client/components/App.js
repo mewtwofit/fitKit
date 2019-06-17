@@ -19,13 +19,16 @@ export default class App extends Component {
     <li>
       <Link to="/diet">Diet</Link>
     </li>
+    <li>
+      <Link to="/summary">Summary</Link>
+    </li>
   </ul>
-
   <hr />
 
   <Route exact path="/" component={Profile} />
   <Route path="/exercise" component={Exercise} />
   <Route path="/diet" component={Diet} />
+  <Route path="/summary" component={Summary} />
 </div>
 </Router>
 
