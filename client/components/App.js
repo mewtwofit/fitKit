@@ -5,7 +5,9 @@ import Diet from "./Diet";
 import Summary from "./Summary";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Visualization from "./visualization";
 import * as actions from "../actions/actions";
+
 
 class App extends Component {
   componentDidMount() {
@@ -33,7 +35,7 @@ class App extends Component {
         }
       });
   }
-
+  
   render() {
     return (
       <Router>
@@ -51,6 +53,9 @@ class App extends Component {
             <li>
               <Link to="/summary">Summary</Link>
             </li>
+            <li>
+              <Link to="/visualization">Calorie Progression</Link>
+            </li>
           </ul>
           <hr />
 
@@ -58,6 +63,7 @@ class App extends Component {
           <Route path="/exercise" component={Exercise} />
           <Route path="/diet" component={Diet} />
           <Route path="/summary" component={Summary} />
+          <Route path="/visualization" component={Visualization} />
         </div>
       </Router>
     );
