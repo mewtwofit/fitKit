@@ -13,6 +13,7 @@ export const reducer = (state = initialState, action) => {
     case actionTypes.ADD_EXERCISE:
       stateCopy = state.exercises.slice();
       stateCopy.push(action.payload);
+      // console.log('testing state add exe', stateCopy)
       return {
         ...state,
         exercises: stateCopy
