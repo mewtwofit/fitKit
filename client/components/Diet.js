@@ -19,15 +19,15 @@ class Diet extends Component {
     this.submitFood = this.submitFood.bind(this);
   };
 
-  componentDidMount(){
-    fetch('http://localhost:5000/getDiet')
-    .then(res => res.json())
-    .then(previousFoodData => {
-      for (let food of previousFoodData){
-        this.props.addFoodAsync(food);
-      }
-    });
-  }
+  // componentDidMount(){
+  //   fetch('http://localhost:5000/getDiet')
+  //   .then(res => res.json())
+  //   .then(previousFoodData => {
+  //     for (let food of previousFoodData){
+  //       this.props.addFoodAsync(food);
+  //     }
+  //   });
+  // }
 
   onFoodChange (event) {
     // console.log(event.target.value);

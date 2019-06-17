@@ -30,15 +30,15 @@ class Exercise extends Component {
     this.changeCalories.bind(this);
   }
 
-  componentDidMount() {
-    fetch("http://localhost:5000/getExercises")
-      .then(res => res.json())
-      .then(exercises => {
-        for(let exercise of exercises){
-          this.props.addExerciseAsync(exercise);
-        }
-      });
-  }
+  // componentDidMount() {
+  //   fetch("http://localhost:5000/getExercises")
+  //     .then(res => res.json())
+  //     .then(exercises => {
+  //       for(let exercise of exercises){
+  //         this.props.addExerciseAsync(exercise);
+  //       }
+  //     });
+  // }
 
   selectType(e) {
     let type = e.target.value;
