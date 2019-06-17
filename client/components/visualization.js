@@ -10,8 +10,8 @@ class Visualization extends Component{
         super(props);
     }
     render(){
-        
-        console.log(this.props.diet)
+        // console.log("Exercises", this.props.exercises);
+        // console.log(this.props.diet)
         let graphData = {};
         for (let i = 0; i < this.props.diet.length;i++){
             if (!graphData[this.props.diet[i].date]){
@@ -21,7 +21,23 @@ class Visualization extends Component{
                 graphData[this.props.diet[i].date]+=this.props.diet[i].calories;
             }
         }
-        console.log(graphData);
+        // console.log(graphData);
+
+        // crete an object literal exercise data
+            let exerciseData = {};
+            for(let i = 0; i < this.props.exercises.length; i++) {
+                if(!exerciseData[this.props.exercises[i].date]) {
+                  exerciseData[this.props.exercises[i].date] = this.props.exercises[i].calories;      
+                } 
+                else {
+                    exerciseData[this.props.exercises[i].date] += this.props.exercises[i].calories;           
+                }  
+            }
+            console.log(exerciseData);
+
+        // use a for loop to loop through the props of exercises and check to see if the newly created object has the date
+        // if not there, add the date as key and calories as value
+        // if there, then add calories to value
         /*
         
         let monthsConversion = {
@@ -54,7 +70,12 @@ class Visualization extends Component{
        let dateObj = {'2019-06-17': "700", 'Jun 16 2019': 600}
         return (
             //'hello'
+            <div>
+            <h1> Calories Consumed </h1>
             <LineChart data={graphData} />
+            <h1> Calories Burned </h1>
+            <LineChart data={exerciseData} />
+            </div>
         );
     }
     
@@ -65,7 +86,8 @@ class Visualization extends Component{
 }
 
 const mapStateToProps = state => ({
-    diet: state.reducers.diet
+    diet: state.reducers.diet,
+    exercises: state.reducers.exercises
   });
   
   export default connect(
