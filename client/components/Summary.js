@@ -70,6 +70,7 @@ class Summary extends Component {
             <h3>Date: {exercise.date}</h3>
             <p>Exercise: {exercise.exercise} Reps: {exercise.reps}</p>
             <p>Cardio Time: {exercise.time}</p>
+          
           </div>
         )
       } else {
@@ -93,16 +94,21 @@ class Summary extends Component {
     
   
     return (
-      <div>
-        <h1></h1>
+      <div className = 'summariescontainer'>
+        <div className = 'summariesdiv'>
         <h3>Your Calorie Summaries By Day: </h3>
         {calorieSummary}
         <br/>
+        </div>
+        <div className = 'summariesdiv'>
         <h3>Your Weight Progression By Day: </h3>
         {weightProgression}
         <br/>
+        </div>
+        <div className ='summariesdiv'>
         <h3>Your Daily Exercises Routine: </h3>
         {exerciseByDay}
+        </div>
       </div>
     )
   }

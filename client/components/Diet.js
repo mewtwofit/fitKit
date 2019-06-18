@@ -60,11 +60,14 @@ class Diet extends Component {
     const dailyLog = [];
     for (let i = 0; i < this.props.diet.length;i++){
       dailyLog.push(
+        <div>
         <PastDayFoods 
         foodName = {this.props.diet[i].food}
         calories = {this.props.diet[i].calories}
         date = {this.props.diet[i].date}
         />
+        <hr></hr>
+        </div>
       )
     }
 
@@ -72,13 +75,14 @@ class Diet extends Component {
       <div>
         <h2>Food Input: </h2>
         <form onSubmit = {event=>this.submitFood(event)}>
-          <label>Food Name</label>
+          <label>Food Name:</label>
           <input onChange = {event => this.onFoodChange(event)} type="text" />
           <br />
-          <label >Calories </label>
+          <label >Calories: </label>
           <input onChange = {event => this.onCalorieChange(event)} type="text" />
           <br />
           <button> Submit </button>
+          <hr></hr>
         </form>
         <h3>Daily Food Log: </h3>
         <div>{dailyLog}</div>
