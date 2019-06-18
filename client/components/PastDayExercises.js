@@ -4,9 +4,8 @@ import { render } from "react-dom";
 export default class PastDayExercises extends Component {
   
   render() {
-    
+    // conditional rendering of component based on incoming props
     if(this.props.reps !== 0){
-      // console.log('testing pastday time', this.props.time)
       return (
         <div>
           <h3>Day: {this.props.day}</h3>
@@ -16,7 +15,6 @@ export default class PastDayExercises extends Component {
         </div>
       );
     } else {
-      // console.log('testing pastday reps', this.props.time)
       return (
         <div>
           <h3>Day: {this.props.day}</h3>
