@@ -99,6 +99,7 @@ class Profile extends Component {
     //Adding content from redux store
     for(let i = 0; i < this.props.summaries.length; i++){
       dailyLog.push(
+        <div>
         <PreviousDaySummary 
           day={this.props.summaries[i].date}
           age={this.props.summaries[i].age}
@@ -108,13 +109,15 @@ class Profile extends Component {
           bmr={this.props.summaries[i].bmr}
           height={this.props.summaries[i].height}
         />
+        <hr></hr>
+        </div>
       );
     };  
 
     return (
       <div>
         <h1>Input User Info: </h1>
-        <form onSubmit={e => this.setBMRandBMIandDate(e)}>
+        <form onSubmit={e => this.setBMRandBMIandDate(e)} className = 'profileuserinfo'>
           <label>Age:</label>
           <input onChange={e => this.changeAge(e)} type="text" />
           <br />
@@ -133,6 +136,7 @@ class Profile extends Component {
           <br />
           <button type="submit">Submit</button>
         </form>
+        <hr></hr>
         <h3>Your Daily Stats: </h3>
         {dailyLog}
       </div>

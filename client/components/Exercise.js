@@ -101,6 +101,7 @@ class Exercise extends Component {
 
     for (let i = 0; i < this.props.exercises.length; i++) {
       dailyLog.push(
+        <div>
         <PastDayExercises
           day={this.props.exercises[i].date}
           exercise={this.props.exercises[i].exercise}
@@ -108,10 +109,12 @@ class Exercise extends Component {
           time={this.props.exercises[i].time}
           calories={this.props.exercises[i].calories}
         />
+        <hr></hr>
+        </div>
       );
     }
     return (
-      <div>
+      <div className = 'exerciseinput'>
         <h2>Exercise Input: </h2>
         <form onSubmit={e => this.setExercise(e)}>
           <br />
@@ -142,10 +145,12 @@ class Exercise extends Component {
           <input onChange={e => this.changeCalories(e)} type="number" />
           <br />
           <button type="submit">Submit</button>
+            <hr></hr>
         </form>
 
         {/*<p> Calories Burnt: {this.state.calories} </p>*/}
         <h3>Daily Exercise Log: </h3>
+        <hr></hr>
         {dailyLog}
       </div>
     );

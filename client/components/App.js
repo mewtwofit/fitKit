@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Visualization from "./visualization";
 import * as actions from "../actions/actions";
+import '../App.css';
 
 
 class App extends Component {
@@ -40,23 +41,17 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <ul>
-            <li>
-              <Link to="/">Profile</Link>
-            </li>
-            <li>
-              <Link to="/exercise">Exercise</Link>
-            </li>
-            <li>
-              <Link to="/diet">Diet</Link>
-            </li>
-            <li>
-              <Link to="/summary">Summary</Link>
-            </li>
-            <li>
-              <Link to="/visualization">Calorie Progression</Link>
-            </li>
-          </ul>
+          <div className = 'navnav'>
+              <Link to="/" style={{textDecoration: 'none'}}>Profile</Link>
+          </div>
+              <Link to="/exercise" style={{textDecoration: 'none'}}> Exercise</Link>
+           <div className = 'navnav'>
+              <Link to="/diet" style={{textDecoration: 'none'}}>Diet</Link>
+            </div>
+              <Link to="/summary" style={{textDecoration: 'none'}}>Summary</Link>
+            <div className = 'navnav'>
+              <Link to="/visualization" style={{textDecoration: 'none'}}>Calorie Progression</Link>
+            </div>
           <hr />
 
           <Route exact path="/" component={Profile} />
