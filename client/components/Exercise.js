@@ -3,16 +3,8 @@ import PastDayExercises from "./PastDayExercises";
 import * as actions from "../actions/actions.js";
 import { connect } from "react-redux";
 
-// Possible TODO: / Known Issues:
-// 1. some inputs throw POST errors, particularly related to time
-// 2. date is not formatted properly
-// 3. calories is just a random number
-// 4. the set box maintains its input number if switching between formats
-// 5. using class component with its own state, not sure if it should be passed down, but can refactor later
-// final note:
-// not sure where this will be rendered, but functionality works when rendered in App for most inputs
-
-//
+// the following code handles the exercise component and its child component PastDayExercises
+// when the exercise route is chosen, this component renders
 class Exercise extends Component {
   constructor(props) {
     super(props);
@@ -30,6 +22,7 @@ class Exercise extends Component {
     this.changeCalories.bind(this);
   }
 
+  // legacy component did mount from previous version. The new Component Did Mount can be found in App.
   // componentDidMount() {
   //   fetch("http://localhost:5000/getExercises")
   //     .then(res => res.json())
@@ -40,12 +33,13 @@ class Exercise extends Component {
   //     });
   // }
 
+  // methods
   selectType(e) {
     let type = e.target.value;
     this.setState({
       type
     });
-    // console.log(type)
+
   }
 
   changeExercise(e) {
@@ -75,7 +69,7 @@ class Exercise extends Component {
       calories
     })
   }
-  // date, exercise, reps, time, calories
+
   setExercise(e) {
     e.preventDefault();
     let time = this.state.time ? this.state.time : "00:00:00";
@@ -97,6 +91,7 @@ class Exercise extends Component {
   }
 
   render() {
+    // pulls data from database and loads it into child component PastDayExercises which is pushed to daily log 
     const dailyLog = [];
 
     for (let i = 0; i < this.props.exercises.length; i++) {
@@ -113,6 +108,7 @@ class Exercise extends Component {
         </div>
       );
     }
+    // conditional form rendering
     return (
       <div className = 'exerciseinput'>
         <h2>Exercise Input: </h2>
@@ -148,7 +144,6 @@ class Exercise extends Component {
             <hr></hr>
         </form>
 
-        {/*<p> Calories Burnt: {this.state.calories} </p>*/}
         <h3>Daily Exercise Log: </h3>
         <hr></hr>
         {dailyLog}
@@ -157,10 +152,12 @@ class Exercise extends Component {
   };
 };
 
+// brings in props for exercises to load data for Past Day Exercise
 const mapStateToProps = state => ({
   exercises: state.reducers.exercises
 });
 
+// sends the data taken from the form to the reducers
 const mapDispatchToProps = dispatch => ({
   addExercise: exercise => dispatch(actions.addExercise(exercise)),
   addExerciseAsync: exercise => dispatch(actions.addExerciseAsync(exercise))
