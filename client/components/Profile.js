@@ -117,30 +117,56 @@ class Profile extends Component {
 
     return (
       <div>
-        <h1>Input User Info: </h1>
-        <form onSubmit={e => this.setBMRandBMIandDate(e)} className = 'profileuserinfo'>
-          <label>Age:</label>
-          <input onChange={e => this.changeAge(e)} type="text" />
-          <br />
-          <label>Weight (lbs):</label>
-          <input onChange={e => this.changeWeight(e)} type="number" />
-          <br />
-          <label>Height (inches):</label>
-          <input onChange={e => this.changeHeight(e)} type="number" />
-          <label>Gender: </label>
-          <br />
-          <select onChange={e => this.selectGender(e)} id="pet-select">
-            <option>Select Your Gender</option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-          </select>
-          <br />
-          <button class="btn btn-success btn-lg"> Submit </button>
-        </form>
-        <hr></hr>
-        <h3>Your Daily Stats: </h3>
-        {dailyLog}
+      <form onSubmit={e => this.setBMRandBMIandDate(e)} className="profileuserinfo">
+        <h1> User Info </h1>
+          <div className="form-group">
+            <label for="InputAge"> Age: </label>
+              <input type="Age" class="form-control" id="InputAge" placeholder="Age" onChange={e => this.changeAge(e)} type="text"/>
+          </div>
+          <div className="form-group">
+            <label for="InputWeight"> Weight (lbs): </label>
+              <input type="Weight" class="form-control" placeholder="Weight" onChange={e => this.changeWeight(e)} /> 
+          </div>
+          <div className="form-group">
+            <label> Height (inches): </label> 
+              <input type="Height" className="form-control" placeholder="Height" onChange={e => this.changeHeight(e)} />
+        </div>
+        <br/> 
+        <select className="form-control" onChange={e => this.selectGender(e)} >
+          <option> Select Your Gender </option>
+          <option> Male </option>
+          <option> Female </option>
+        </select>
+        <br/>
+        <button className="btn btn-success btn-lg"> Submit </button>
+      </form>
       </div>
+
+      // <div>
+      //   <h1>Input User Info: </h1>
+      //   <form onSubmit={e => this.setBMRandBMIandDate(e)} className = 'profileuserinfo'>
+      //     <label>Age:</label>
+      //     <input onChange={e => this.changeAge(e)} type="text" />
+      //     <br />
+      //     <label>Weight (lbs):</label>
+      //     <input onChange={e => this.changeWeight(e)} type="number" />
+      //     <br />
+      //     <label>Height (inches):</label>
+      //     <input onChange={e => this.changeHeight(e)} type="number" />
+      //     <label>Gender: </label>
+      //     <br />
+      //     <select onChange={e => this.selectGender(e)} id="pet-select">
+      //       <option>Select Your Gender</option>
+      //       <option value="M">Male</option>
+      //       <option value="F">Female</option>
+      //     </select>
+      //     <br />
+      //     <button class="btn btn-success btn-lg"> Submit </button>
+      //   </form>
+      //   <hr></hr>
+      //   <h3>Your Daily Stats: </h3>
+      //   {dailyLog}
+      // </div>
     );
   };
 };
