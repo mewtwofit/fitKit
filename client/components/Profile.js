@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions/actions.js";
 import PreviousDaySummary from './PreviousDaySummary.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 //Dear Iteration Group, this is some really hacky code. We were running out of time. Apologies.
 //Please come to me for any questions regarding this component. 
@@ -134,7 +135,7 @@ class Profile extends Component {
             <option value="F">Female</option>
           </select>
           <br />
-          <button type="submit">Submit</button>
+          <button class="btn btn-success btn-lg"> Submit </button>
         </form>
         <hr></hr>
         <h3>Your Daily Stats: </h3>

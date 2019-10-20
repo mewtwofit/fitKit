@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PastDayFoods from './PastDayFoods';
 import * as actions from '../actions/actions';
 import {connect} from 'react-redux';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 //ask exactly what foodData is. is it the state?
 class Diet extends Component {
@@ -81,7 +82,7 @@ class Diet extends Component {
           <label >Calories: </label>
           <input onChange = {event => this.onCalorieChange(event)} type="text" />
           <br />
-          <button> Submit </button>
+          <button class="btn btn-success btn-lg"> Submit </button>
           <hr></hr>
         </form>
         <h3>Daily Food Log: </h3>

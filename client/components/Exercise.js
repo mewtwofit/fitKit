@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PastDayExercises from "./PastDayExercises";
 import * as actions from "../actions/actions.js";
 import { connect } from "react-redux";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 // the following code handles the exercise component and its child component PastDayExercises
 // when the exercise route is chosen, this component renders
@@ -140,7 +141,7 @@ class Exercise extends Component {
           <label> Calories Burned: </label>
           <input onChange={e => this.changeCalories(e)} type="number" />
           <br />
-          <button type="submit">Submit</button>
+          <button className="btn btn-success btn-lg">Submit</button>
             <hr></hr>
         </form>
 
