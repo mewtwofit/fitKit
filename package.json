@@ -22,7 +22,7 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.0.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "style-loader": "^0.23.1",
     "webpack-cli": "^3.3.4",
     "webpack-dev-server": "^3.7.1"
